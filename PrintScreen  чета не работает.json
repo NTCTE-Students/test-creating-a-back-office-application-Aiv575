@@ -1,0 +1,364 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "name": "KR2",
+  "sources": [
+    {
+      "id": "08696161-de41-4ab9-a493-9a1251507045",
+      "name": "default",
+      "kind": {
+        "kind": "AmlEditor"
+      },
+      "content": [
+        "users",
+        "  id \"unsigned bigint\" pk",
+        "  name varchar(120) index",
+        "  email varchar(200) unique",
+        "  password varchar(50)",
+        "",
+        "zakazs",
+        "  id \"unsigned bigint\" pk",
+        "  product_1 varchar(120)",
+        "  product_2 varchar(120)",
+        "  price int ",
+        "  status varchar(100)",
+        "  user_id \"unsigned bigint\"",
+        "  inventorys_id \"unsigned bigint\"",
+        "",
+        "sales",
+        "  id \"unsigned bigint\" pk",
+        "  quantity int",
+        "  sales int",
+        "  zakaz_id \"unsigned bigint\"",
+        "",
+        "inventorys",
+        "  id \"unsigned bigint\" pk",
+        "  product_1 varchar(120)",
+        "  product_2 varchar(120)",
+        "",
+        "finanses",
+        "  id \"unsigned bigint\" pk",
+        "  rashod int",
+        "  dohod int",
+        "  sale_id \"unsigned bigint\"",
+        "",
+        "fk zakazs.user_id -> users.id",
+        "fk sales.zakaz_id -> zakazs.id",
+        "fk zakazs.inventorys_id -> inventorys.id",
+        "fk finanses.sale_id -> sales.id",
+        ""
+      ],
+      "tables": [
+        {
+          "schema": "",
+          "table": "finanses",
+          "columns": [
+            {
+              "name": "id",
+              "type": "unsigned bigint"
+            },
+            {
+              "name": "rashod",
+              "type": "int"
+            },
+            {
+              "name": "dohod",
+              "type": "int"
+            },
+            {
+              "name": "sale_id",
+              "type": "unsigned bigint"
+            }
+          ],
+          "primaryKey": {
+            "columns": [
+              "id"
+            ]
+          }
+        },
+        {
+          "schema": "",
+          "table": "inventorys",
+          "columns": [
+            {
+              "name": "id",
+              "type": "unsigned bigint"
+            },
+            {
+              "name": "product_1",
+              "type": "varchar(120)"
+            },
+            {
+              "name": "product_2",
+              "type": "varchar(120)"
+            }
+          ],
+          "primaryKey": {
+            "columns": [
+              "id"
+            ]
+          }
+        },
+        {
+          "schema": "",
+          "table": "sales",
+          "columns": [
+            {
+              "name": "id",
+              "type": "unsigned bigint"
+            },
+            {
+              "name": "quantity",
+              "type": "int"
+            },
+            {
+              "name": "sales",
+              "type": "int"
+            },
+            {
+              "name": "zakaz_id",
+              "type": "unsigned bigint"
+            }
+          ],
+          "primaryKey": {
+            "columns": [
+              "id"
+            ]
+          }
+        },
+        {
+          "schema": "",
+          "table": "users",
+          "columns": [
+            {
+              "name": "id",
+              "type": "unsigned bigint"
+            },
+            {
+              "name": "name",
+              "type": "varchar(120)"
+            },
+            {
+              "name": "email",
+              "type": "varchar(200)"
+            },
+            {
+              "name": "password",
+              "type": "varchar(50)"
+            }
+          ],
+          "primaryKey": {
+            "columns": [
+              "id"
+            ]
+          },
+          "uniques": [
+            {
+              "name": "users_email_unique_az",
+              "columns": [
+                "email"
+              ]
+            }
+          ],
+          "indexes": [
+            {
+              "name": "users_name_index_az",
+              "columns": [
+                "name"
+              ]
+            }
+          ]
+        },
+        {
+          "schema": "",
+          "table": "zakazs",
+          "columns": [
+            {
+              "name": "id",
+              "type": "unsigned bigint"
+            },
+            {
+              "name": "product_1",
+              "type": "varchar(120)"
+            },
+            {
+              "name": "product_2",
+              "type": "varchar(120)"
+            },
+            {
+              "name": "price",
+              "type": "int"
+            },
+            {
+              "name": "status",
+              "type": "varchar(100)"
+            },
+            {
+              "name": "user_id",
+              "type": "unsigned bigint"
+            },
+            {
+              "name": "inventorys_id",
+              "type": "unsigned bigint"
+            }
+          ],
+          "primaryKey": {
+            "columns": [
+              "id"
+            ]
+          }
+        }
+      ],
+      "relations": [
+        {
+          "name": "zakazs_user_id_fk_az",
+          "src": {
+            "table": ".zakazs",
+            "column": "user_id"
+          },
+          "ref": {
+            "table": ".users",
+            "column": "id"
+          }
+        },
+        {
+          "name": "sales_zakaz_id_fk_az",
+          "src": {
+            "table": ".sales",
+            "column": "zakaz_id"
+          },
+          "ref": {
+            "table": ".zakazs",
+            "column": "id"
+          }
+        },
+        {
+          "name": "zakazs_inventorys_id_fk_az",
+          "src": {
+            "table": ".zakazs",
+            "column": "inventorys_id"
+          },
+          "ref": {
+            "table": ".inventorys",
+            "column": "id"
+          }
+        },
+        {
+          "name": "virtual relation",
+          "src": {
+            "table": ".finanses",
+            "column": "sale_id"
+          },
+          "ref": {
+            "table": ".sales",
+            "column": "id"
+          }
+        }
+      ],
+      "createdAt": 1717422064761,
+      "updatedAt": 1717423866399
+    }
+  ],
+  "layouts": {
+    "initial layout": {
+      "tables": [
+        {
+          "id": ".inventorys",
+          "position": {
+            "left": 330,
+            "top": 460
+          },
+          "size": {
+            "width": 173.18333435058594,
+            "height": 117
+          },
+          "color": "blue",
+          "columns": [
+            "id",
+            "product_1",
+            "product_2"
+          ]
+        },
+        {
+          "id": ".finanses",
+          "position": {
+            "left": 50,
+            "top": 240
+          },
+          "size": {
+            "width": 209.03334045410156,
+            "height": 141
+          },
+          "color": "pink",
+          "columns": [
+            "id",
+            "rashod",
+            "dohod",
+            "sale_id"
+          ]
+        },
+        {
+          "id": ".sales",
+          "position": {
+            "left": 310,
+            "top": 270
+          },
+          "size": {
+            "width": 220.35000610351562,
+            "height": 141
+          },
+          "color": "rose",
+          "columns": [
+            "id",
+            "quantity",
+            "sales",
+            "zakaz_id"
+          ]
+        },
+        {
+          "id": ".zakazs",
+          "position": {
+            "left": 590,
+            "top": 270
+          },
+          "size": {
+            "width": 256.3833312988281,
+            "height": 213
+          },
+          "color": "cyan",
+          "columns": [
+            "id",
+            "product_1",
+            "product_2",
+            "price",
+            "status",
+            "user_id",
+            "inventorys_id"
+          ]
+        },
+        {
+          "id": ".users",
+          "position": {
+            "left": 970,
+            "top": 290
+          },
+          "size": {
+            "width": 173.18333435058594,
+            "height": 141
+          },
+          "color": "green",
+          "columns": [
+            "id",
+            "name",
+            "email",
+            "password"
+          ]
+        }
+      ],
+      "createdAt": 1717422064761,
+      "updatedAt": 1717424068946
+    }
+  },
+  "createdAt": 1717422068873,
+  "updatedAt": 1717422068873,
+  "version": 2
+}
